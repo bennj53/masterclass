@@ -27,4 +27,34 @@ class RestaurantServiceTest {
         //Then
         Assertions.assertEquals(30.0, prix);
     }
+
+    @Test
+    void calculerPrixPanier() {
+        //Given
+        double prixPanier;
+        Ingredient moules = new Ingredient("moule", true, 0);
+        Ingredient riz = new Ingredient("riz", false, 0);
+        Ingredient safran = new Ingredient("safran", false, 0);
+        Ingredient pimentRouge = new Ingredient("piment rouge", false, 3);
+        Ingredient vinaigre = new Ingredient("vinaigre", false, 0);
+        List<Ingredient> ingredientsPaella = List.of(moules,riz,pimentRouge, safran);
+        List<Ingredient> ingredientsRizVinaigre = List.of(moules,riz,pimentRouge, safran);
+
+        Plat paella = new Principal("paëlla", 15.50, ingredientsPaella, false);
+        Plat rizVinaigre = new Entree("riz", 5.0, ingredientsRizVinaigre);
+
+        Formule formule = new Formule("Entrée + Plat", List.of(rizVinaigre, paella));
+
+        Panier panier = new Panier();
+        panier.ajouterFormule(formule);
+        panier.ajouterPlat(paella);
+
+        RestaurantService restaurantService = new RestaurantService();
+
+        //When
+        prixPanier = restaurantService.calculerPrixPanier(panier);
+
+        //Then
+        Assertions.assertEquals(36, prixPanier);
+    }
 }

@@ -11,4 +11,10 @@ public class RestaurantService {
                .reduce(Double::sum)
                .orElse(0.0);
     }
+
+    public double calculerPrixPanier(Panier panier) {
+        double prixDesFormules = panier.formules.stream().mapToDouble(formule -> this.calculerPrixFormule(formule)).sum();
+        double prixDesPlatsHorsFormule = panier.platsHorsFormule.stream().mapToDouble(plat -> plat.getPrix()).sum();
+        return prixDesFormules + prixDesPlatsHorsFormule;
+    }
 }
