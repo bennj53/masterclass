@@ -57,4 +57,21 @@ class RestaurantServiceTest {
         //Then
         Assertions.assertEquals(36, prixPanier);
     }
+
+    @Test
+    void ajouterPlatAuPanier(){
+        //Given
+        Panier panierUtilisateur = new Panier();
+        Utilisateur utilisateur = new Utilisateur("Bob", "Ladalle", panierUtilisateur);
+        Plat plat = new Principal("paëlla", 15.50, List.of(new Ingredient("riz", false, 0)), false);
+        RestaurantService restaurantService = new RestaurantService();
+
+        //When
+        Panier panierResultat = restaurantService.ajouterPlatAuPanier(utilisateur, plat);
+
+        //Then
+        Assertions.assertEquals(panierUtilisateur, panierResultat);
+        Assertions.assertEquals(1, panierResultat.getPlatsHorsFormule().size());
+        Assertions.assertEquals(plat, panierResultat.getPlatsHorsFormule().get(0));
+    }
 }

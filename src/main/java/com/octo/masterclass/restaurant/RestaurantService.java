@@ -17,4 +17,9 @@ public class RestaurantService {
         double prixDesPlatsHorsFormule = panier.platsHorsFormule.stream().mapToDouble(plat -> plat.getPrix()).sum();
         return prixDesFormules + prixDesPlatsHorsFormule;
     }
+
+    public Panier ajouterPlatAuPanier(Utilisateur utilisateur, Plat plat){
+        utilisateur.getPanier().ajouterPlat(plat);
+        return utilisateur.getPanier();
+    }
 }

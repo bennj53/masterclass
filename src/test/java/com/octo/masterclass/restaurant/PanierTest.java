@@ -59,4 +59,14 @@ class PanierTest {
         Assertions.assertIterableEquals(formulesDuPanierAttendus, panier.formules);
     }
 
+    @Test
+    void quand_je_crée_un_panier_son_identifiant_est_incrémenté(){
+        //When
+        Panier panier0 = new Panier();
+        Panier panier1 = new Panier();
+        //Then
+        Assertions.assertTrue(panier0.getIdentifiant() >= 0);
+        Assertions.assertTrue(panier1.getIdentifiant() >= 1);
+    }
+
 }

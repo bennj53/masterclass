@@ -4,12 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Panier {
+    private static Long identifiantGenerateur = 0L;
     List<Plat> platsHorsFormule;
     List<Formule> formules;
+    Long identifiant;
 
     public Panier() {
         this.platsHorsFormule = new ArrayList<>();
         this.formules = new ArrayList<>();
+        this.identifiant = identifiantGenerateur++;
+    }
+
+    public Panier(List<Plat> platsHorsFormule, List<Formule> formules, Long identifiant) {
+        this.platsHorsFormule = platsHorsFormule;
+        this.formules = formules;
+        this.identifiant = identifiant;
     }
 
     public List<Plat> getPlatsHorsFormule() {
@@ -34,5 +43,9 @@ public class Panier {
 
     public void supprimerPlat(Plat plat) {
         this.platsHorsFormule.add(plat);
+    }
+
+    public Long getIdentifiant() {
+        return identifiant;
     }
 }

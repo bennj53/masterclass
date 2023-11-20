@@ -1,16 +1,11 @@
 package com.octo.masterclass.restaurant;
 
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 public class Formule {
     String nom;
 
     List<Plat> composition;
-
-    public Formule() {
-    }
 
     public Formule(String nom, List<Plat> listePlat) {
         this.nom = nom;
