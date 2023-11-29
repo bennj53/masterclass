@@ -1,11 +1,10 @@
-package com.octo.masterclass.restaurant;
+package com.octo.masterclass.a_supprimer_s_utilise_juste_dans_les_tests.aRefacto_restaurant;
 
+import com.octo.masterclass.a_supprimer_s_utilise_juste_dans_les_tests.aRefacto_restaurant.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PanierTest {
 

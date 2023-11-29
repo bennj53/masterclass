@@ -1,6 +1,6 @@
-package com.octo.masterclass.api;
+package com.octo.masterclass.a_supprimer_s_utilise_juste_dans_les_tests.aRefacto_api;
 
-import com.octo.masterclass.restaurant.*;
+import com.octo.masterclass.a_supprimer_s_utilise_juste_dans_les_tests.aRefacto_restaurant.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

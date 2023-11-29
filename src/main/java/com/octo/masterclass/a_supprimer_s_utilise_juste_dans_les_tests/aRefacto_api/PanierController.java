@@ -1,9 +1,9 @@
-package com.octo.masterclass.api;
+package com.octo.masterclass.a_supprimer_s_utilise_juste_dans_les_tests.aRefacto_api;
 
-import com.octo.masterclass.restaurant.Panier;
-import com.octo.masterclass.restaurant.Plat;
-import com.octo.masterclass.restaurant.RestaurantService;
-import com.octo.masterclass.restaurant.Utilisateur;
+import com.octo.masterclass.a_supprimer_s_utilise_juste_dans_les_tests.aRefacto_restaurant.Panier;
+import com.octo.masterclass.a_supprimer_s_utilise_juste_dans_les_tests.aRefacto_restaurant.Plat;
+import com.octo.masterclass.a_supprimer_s_utilise_juste_dans_les_tests.aRefacto_restaurant.RestaurantService;
+import com.octo.masterclass.a_supprimer_s_utilise_juste_dans_les_tests.aRefacto_restaurant.Utilisateur;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

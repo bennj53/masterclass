@@ -1,4 +1,4 @@
-package com.octo.masterclass.api;
+package com.octo.masterclass.a_supprimer_s_utilise_juste_dans_les_tests.aRefacto_api;
 
 import com.octo.masterclass.fixtures.PlatFixture;
 import com.octo.masterclass.domain.entity.Plat;
@@ -28,11 +28,11 @@ class PlatControllerTest {
     private final List<Plat> expectedPlats = PlatFixture.tousLesPlats();
 
     @MockBean
-    private DataBasePlatDAO platRepositoryMocked;
+    private DataBasePlatDAO dataBasePlatDAOMocked;
 
     @Test
     public void testGetAllPlats() throws Exception {
-        when(platRepositoryMocked.findAll()).thenReturn(expectedPlats);
+        when(dataBasePlatDAOMocked.findAll()).thenReturn(expectedPlats);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/plats")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -75,7 +75,7 @@ class PlatControllerTest {
 
     @Test
     public void testSupprimerPlat() throws Exception {
-        when(platRepositoryMocked.findById(1L)).thenReturn(Optional.ofNullable(expectedPlats.get(0)));
+        when(dataBasePlatDAOMocked.findById(1L)).thenReturn(Optional.ofNullable(expectedPlats.get(0)));
         mockMvc.perform(MockMvcRequestBuilders.delete("/plats/delete/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

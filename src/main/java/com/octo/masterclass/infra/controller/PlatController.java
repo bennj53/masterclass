@@ -1,11 +1,11 @@
 package com.octo.masterclass.infra.controller;
 
-import com.octo.masterclass.domain.exceptions.IngredientNotFoundException;
 import com.octo.masterclass.domain.entity.Ingredient;
-import com.octo.masterclass.domain.usecase.PlatUseCase;
-import com.octo.masterclass.domain.usecase.IngredientsUseCase;
 import com.octo.masterclass.domain.entity.Plat;
-import com.octo.masterclass.infra.repository.DataBasePlatDAO;
+import com.octo.masterclass.domain.exceptions.IngredientNotFoundException;
+import com.octo.masterclass.domain.usecase.IngredientUseCase;
+import com.octo.masterclass.domain.usecase.PlatUseCase;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,21 +14,18 @@ import java.util.List;
 @RequestMapping("/plats")
 public class PlatController {
 
-    private final DataBasePlatDAO platRepository;
     private final PlatUseCase platUseCase;
 
-    private final IngredientsUseCase ingredientsUseCase;
+    private final IngredientUseCase ingredientUseCase;
 
-    public PlatController(DataBasePlatDAO platRepository, PlatUseCase platUseCase, IngredientsUseCase ingredientsUseCase) {
-        this.platRepository = platRepository;
+    public PlatController(PlatUseCase platUseCase, IngredientUseCase ingredientUseCase) {
         this.platUseCase = platUseCase;
-        this.ingredientsUseCase = ingredientsUseCase;
+        this.ingredientUseCase = ingredientUseCase;
     }
 
     @GetMapping
-    public Iterable<Plat> getAllPlats() {
-        //return this.platRepository.findAll();
-       return this.platUseCase.recupererTousLesPlats();
+    public ResponseEntity<Iterable<Plat>> getAllPlats() {
+       return ResponseEntity.ok().body(this.platUseCase.recupererTousLesPlats());
     }
 
     @DeleteMapping(path = "/delete/{id}")
@@ -37,7 +34,7 @@ public class PlatController {
     }
 
     @PostMapping
-    public Plat ajouterPlat(@RequestBody PlatApi platApiAAJouter) throws Exception {
+    public ResponseEntity<Plat> ajouterPlat(@RequestBody PlatApi platApiAAJouter) throws Exception {
         List<Ingredient> ingredientsDuPlat = platApiAAJouter.ingredients().stream()
                 .map(ingredientApi -> new Ingredient(
                         ingredientApi.nom(),
@@ -45,7 +42,7 @@ public class PlatController {
                         ingredientApi.kipik()))
                 .toList();
 
-        List<Ingredient> ingredientsDuPlatEnBDD = this.ingredientsUseCase.recupererDesIngredients(ingredientsDuPlat);
+        List<Ingredient> ingredientsDuPlatEnBDD = this.ingredientUseCase.recupererDesIngredients(ingredientsDuPlat);
 
         if(ingredientsDuPlatEnBDD.size() != ingredientsDuPlat.size()){
             List<String> nomsDesIngredientsDuPlatEnBDD = ingredientsDuPlatEnBDD.stream().map(Ingredient::getNom).toList();
@@ -64,7 +61,8 @@ public class PlatController {
                 ingredientsDuPlatEnBDD
         );
 
-       return this.platUseCase.ajouter(plat);
+       return ResponseEntity.ok()
+               .body(this.platUseCase.ajouter(plat));
     }
 
 

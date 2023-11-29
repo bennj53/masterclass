@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class IngredientsUseCase {
+public class IngredientUseCase {
 
     private IngredientRepository ingredientRepository;
 
-    public IngredientsUseCase(IngredientRepository ingredientRepository) {
+    public IngredientUseCase(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }
 

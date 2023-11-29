@@ -7,24 +7,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class DataBasePlatRepository implements PlatRepository {
 
-    private final DataBasePlatDAO platRepository;
+    private final DataBasePlatDAO dataBasePlatDAO;
 
-    public DataBasePlatRepository(DataBasePlatDAO platRepository) {
-        this.platRepository = platRepository;
+    public DataBasePlatRepository(DataBasePlatDAO dataBasePlatDAO) {
+        this.dataBasePlatDAO = dataBasePlatDAO;
     }
 
     @Override
     public Plat ajouter(Plat plat) throws Exception {
-        return this.platRepository.save(plat);
+        return this.dataBasePlatDAO.save(plat);
     }
 
     @Override
     public void supprimer(Long id) throws Exception {
-        this.platRepository.deleteById(id);
+        this.dataBasePlatDAO.deleteById(id);
     }
 
     @Override
     public Iterable<Plat> recupererTousLesPlats() {
-        return this.platRepository.findAll();
+        return this.dataBasePlatDAO.findAll();
     }
 }
