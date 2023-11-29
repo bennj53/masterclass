@@ -1,5 +1,6 @@
-package com.octo.masterclass.persistence;
+package com.octo.masterclass.infra.repository;
 
+import com.octo.masterclass.domain.entity.Plat;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -13,12 +14,19 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PlatRepository extends CrudRepository<Plat, Long> {
+public interface DataBasePlatDAO extends CrudRepository<Plat, Long> {
     @PersistenceContext
-    ThreadLocal<EntityManager> entityManager = new ThreadLocal<EntityManager>();
-    //exemple requette JPQL
+    ThreadLocal<EntityManager> entityManager = new ThreadLocal<>();
+
+    //exemples requettes JPQL
+
+    //par nom
     @Query("SELECT p FROM Plat p WHERE p.prix > :prixMin")
-    List<Plat> findByPrixGreaterThan(@Param("prixMin") Double prixMin);
+    List<Plat> findByPrixGreaterThanWithName(@Param("prixMin") Double prixMin);
+
+    //par index
+    @Query("SELECT p FROM Plat p WHERE p.prix > ?1")
+    List<Plat> findByPrixGreaterThanWithIndex(Double prixMin);
 
     //exemple api Criteria
     default List<Plat> findByPrixGreaterThanUsingCriteria(Double prixMin) {

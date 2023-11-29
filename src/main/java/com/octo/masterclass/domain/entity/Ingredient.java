@@ -1,4 +1,4 @@
-package com.octo.masterclass.persistence;
+package com.octo.masterclass.domain.entity;
 
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
@@ -6,11 +6,13 @@ import jakarta.transaction.Transactional;
 @Entity
 public class Ingredient {
 
-        @Id@GeneratedValue(strategy = GenerationType.AUTO)
+        @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
         long id;
+        @Column(unique=true)
         String nom;
         boolean allergene;
         int kipik;
+
 
         public Ingredient() {
         }
@@ -20,6 +22,7 @@ public class Ingredient {
                 this.allergene = allergene;
                 this.kipik = kipik;
         }
+
 
         public String getNom() {
                 return nom;

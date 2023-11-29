@@ -1,7 +1,7 @@
 package com.octo.masterclass.fixtures;
 
-import com.octo.masterclass.persistence.Ingredient;
-import com.octo.masterclass.persistence.Plat;
+import com.octo.masterclass.domain.entity.Ingredient;
+import com.octo.masterclass.domain.entity.Plat;
 
 import java.util.List;
 

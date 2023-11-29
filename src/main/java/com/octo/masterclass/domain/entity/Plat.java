@@ -1,7 +1,6 @@
-package com.octo.masterclass.persistence;
+package com.octo.masterclass.domain.entity;
 
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -13,8 +12,14 @@ public class Plat {
     Long id;
     String nom;
     Double prix;
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "PLAT_ID")
+
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+    @JoinTable(
+            name = "plats_ingredients",
+            joinColumns = @JoinColumn(name = "plat_id"),
+            inverseJoinColumns =   @JoinColumn(name = "ingredient_id")
+    )
     List<Ingredient> ingredients;
 
     public Plat() {
